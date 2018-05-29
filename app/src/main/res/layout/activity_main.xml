@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#FFFFFF"
+            android:background="@color/toolbar_custom"
             app:titleTextColor="@color/primary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
             <RelativeLayout
@@ -26,8 +26,8 @@
 
                 <ImageView
                     android:id="@+id/iv_logo"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/logo_size"
+                    android:layout_height="@dimen/logo_size"
                     android:src="@drawable/ted_logo"/>
 
                 <TextView
@@ -37,7 +37,7 @@
                     android:layout_toRightOf="@+id/iv_logo"
                     android:text="Talks"
                     android:textSize="@dimen/text_regular_3x"
-                    android:layout_marginTop="11dp"
+                    android:layout_marginTop="@dimen/custom_margin"
                     android:textColor="@color/primary"
                     android:textStyle="bold"/>
 

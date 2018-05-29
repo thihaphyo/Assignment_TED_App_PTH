@@ -34,5 +34,10 @@
 
     <!--App Specifc-->
 
-    <dimen name="publication_logo_size">120dp</dimen>
+    <dimen name="menu_icon">10dp</dimen>
+    <dimen name="card_height">240dp</dimen>
+    <dimen name="talk_content_width">270dp</dimen>
+    <dimen name="logo_size">50dp</dimen>
+    <dimen name="custom_margin">11dp</dimen>
+
 </resources>

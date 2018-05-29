@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
+    android:layout_height="@dimen/card_height"
     android:layout_margin="@dimen/margin_medium"
     android:background="@drawable/google_io_18">
 
@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/tv_talk_content"
-        android:layout_width="270dp"
+        android:layout_width="@dimen/talk_content_width"
         android:layout_height="wrap_content"
         android:text="Learn about Google Keynote led by Sundar Pichai."
         android:layout_alignParentBottom="true"
@@ -32,7 +32,7 @@
         android:textStyle="bold"/>
     <ImageView
         android:id="@+id/iv_menu"
-        android:layout_width="10dp"
+        android:layout_width="@dimen/menu_icon"
         android:layout_height="10dp"
         android:layout_alignRight="@+id/tv_time"
         android:src="@drawable/menu"
