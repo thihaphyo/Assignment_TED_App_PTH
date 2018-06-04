@@ -251,7 +251,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tv_talker_profile_name"
                 android:layout_below="@+id/tv_talker_profile_name"
-                android:layout_marginTop="@dimen/margin_small"
                 android:text="CEO at Google"
                 android:textColor="@color/secondary_text"
                 android:textSize="@dimen/text_small" />
