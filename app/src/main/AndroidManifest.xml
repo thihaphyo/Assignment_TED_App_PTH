@@ -21,7 +21,8 @@
         </activity>
         <activity
             android:name=".activities.TalksDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activities.MainActivity"/>
     </application>
 
 </manifest>

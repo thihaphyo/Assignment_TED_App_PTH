@@ -12,4 +12,6 @@
     <color name="toolbar_custom">#FFFFFF</color>
     <color name="bg_button_white">#00FFFFFF</color>
     <color name="bg_sponsor_block">#BDBDBD</color>
+    <color name="ripple_color">#7FFFFFFF</color>
+    <color name="bg_color_black">#000000</color>
 </resources>
