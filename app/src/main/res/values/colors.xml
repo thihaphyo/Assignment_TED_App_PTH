@@ -10,4 +10,6 @@
     <color name="divider">#BDBDBD</color>
     <color name="customText">#FFFFFF</color>
     <color name="toolbar_custom">#FFFFFF</color>
+    <color name="bg_button_white">#00FFFFFF</color>
+    <color name="bg_sponsor_block">#BDBDBD</color>
 </resources>

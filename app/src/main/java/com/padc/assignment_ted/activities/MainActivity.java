@@ -1,5 +1,6 @@
-package com.padc.assignment_ted;
+package com.padc.assignment_ted.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,9 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.padc.assignment_ted.adapters.TalkListAdapter;
 
-public class MainActivity extends AppCompatActivity {
+import com.padc.assignment_ted.R;
+import com.padc.assignment_ted.adapters.TalkListAdapter;
+import com.padc.assignment_ted.delegates.TalksDelegate;
+
+public class MainActivity extends BaseActivity
+        implements TalksDelegate{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
        RecyclerView rvTalkList =  findViewById(R.id.rv_talks);
-       TalkListAdapter talkListAdapter = new TalkListAdapter();
+       TalkListAdapter talkListAdapter = new TalkListAdapter(this);
        rvTalkList.setAdapter(talkListAdapter);
        rvTalkList.setLayoutManager(new LinearLayoutManager(getApplicationContext()
                                  ,LinearLayoutManager.VERTICAL,false));
@@ -60,5 +65,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTapTalk() {
+        Intent intent = new Intent(getApplicationContext(),TalksDetailsActivity.class);
+        startActivity(intent);
     }
 }
