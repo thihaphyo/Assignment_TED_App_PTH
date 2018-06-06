@@ -98,7 +98,7 @@
                 android:clickable="true"
                 android:foreground="@drawable/ripple"
                 android:orientation="horizontal"
-                android:paddingTop="1dp">
+                android:paddingTop="@dimen/padding_one">
 
                 <ImageView
                     android:id="@+id/iv_listen"
@@ -111,7 +111,7 @@
                     android:id="@+id/tv_listen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="2dp"
+                    android:paddingTop="@dimen/padding_two"
                     android:text="Listen"
                     android:textColor="@color/secondary_text"
                     android:textSize="@dimen/text_regular" />
@@ -179,10 +179,10 @@
             <View
                 android:id="@+id/v_top_separator"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:layout_below="@id/tv_poster"
                 android:layout_marginTop="@dimen/margin_medium_3"
-                android:background="@color/divider" />
+                style="@style/AppTheme.DividerTheme"
+                />
 
             <TextView
                 android:id="@+id/tv_sponsor"
@@ -198,7 +198,7 @@
             <View
                 android:id="@+id/v_sponsor"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/sponsor_block_height"
                 android:layout_below="@id/tv_sponsor"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@color/bg_sponsor_block" />
@@ -206,10 +206,9 @@
             <View
                 android:id="@+id/v_middle_separator"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:layout_below="@id/v_sponsor"
                 android:layout_marginTop="@dimen/margin_medium_2"
-                android:background="@color/divider" />
+                style="@style/AppTheme.DividerTheme" />
 
             <TextView
                 android:id="@+id/tv_about"
@@ -230,7 +229,7 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:src="@drawable/ic_ceo_google"
                 app:civ_border_color="@color/divider"
-                app:civ_border_width="2dp" />
+                app:civ_border_width="@dimen/profile_border" />
 
             <TextView
                 android:id="@+id/tv_talker_profile_name"
@@ -239,7 +238,6 @@
                 android:layout_alignTop="@+id/iv_profile"
                 android:layout_marginLeft="@dimen/margin_medium"
                 android:layout_toRightOf="@+id/iv_profile"
-
                 android:text="Sundar Pichai"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_regular_3x"
@@ -270,10 +268,9 @@
             <View
                 android:id="@+id/v_bottom_separator"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:layout_below="@+id/tv_talker_bio"
                 android:layout_marginTop="@dimen/margin_medium_2"
-                android:background="@color/divider" />
+                style="@style/AppTheme.DividerTheme" />
 
             <TextView
                 android:id="@+id/tv_watch_next"

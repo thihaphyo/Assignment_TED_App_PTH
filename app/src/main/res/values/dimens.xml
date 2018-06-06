@@ -40,5 +40,10 @@
     <dimen name="logo_size">50dp</dimen>
     <dimen name="custom_margin">11dp</dimen>
     <dimen name="talk_detail_appbar_height">256dp</dimen>
+    <dimen name="padding_one">1dp</dimen>
+    <dimen name="padding_two">2dp</dimen>
+    <dimen name="profile_border">2dp</dimen>
+    <dimen name="separator_height">1dp</dimen>
+    <dimen name="sponsor_block_height">40dp</dimen>
 
 </resources>
