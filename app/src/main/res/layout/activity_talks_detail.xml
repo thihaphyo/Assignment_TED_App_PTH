@@ -221,16 +221,15 @@
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_regular_3x" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/iv_profile"
                 android:layout_width="@dimen/profile_pic_width"
                 android:layout_height="@dimen/profile_pic_width"
                 android:layout_alignLeft="@+id/tv_about"
                 android:layout_below="@+id/tv_about"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:src="@drawable/ic_ceo_google"
-                app:civ_border_color="@color/divider"
-                app:civ_border_width="@dimen/profile_border" />
+                android:src="@drawable/google_ceo"
+                />
 
             <TextView
                 android:id="@+id/tv_talker_profile_name"
