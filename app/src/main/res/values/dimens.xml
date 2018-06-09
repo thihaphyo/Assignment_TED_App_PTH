@@ -45,5 +45,6 @@
     <dimen name="profile_border">2dp</dimen>
     <dimen name="separator_height">1dp</dimen>
     <dimen name="sponsor_block_height">40dp</dimen>
+    <dimen name="profile_pic_width">50dp</dimen>
 
 </resources>
