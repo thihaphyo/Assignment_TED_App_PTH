@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.padc.assignment_ted.R;
 import com.padc.assignment_ted.adapters.TalkListAdapter;
+import com.padc.assignment_ted.data.models.TedTalkModel;
 import com.padc.assignment_ted.delegates.TalksDelegate;
 
 public class MainActivity extends BaseActivity
@@ -42,6 +43,9 @@ public class MainActivity extends BaseActivity
        rvTalkList.setAdapter(talkListAdapter);
        rvTalkList.setLayoutManager(new LinearLayoutManager(getApplicationContext()
                                  ,LinearLayoutManager.VERTICAL,false));
+
+        TedTalkModel.getObjectReference().loadTalkList();
+        TedTalkModel.getObjectReference().loadTalkPlayList();
 
     }
 
