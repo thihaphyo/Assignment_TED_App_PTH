@@ -5,7 +5,9 @@ package com.padc.assignment_ted.network;
  */
 public interface TedTalkDataAgent {
 
-    void loadTalkList(int page,String accessToken);
-    void loadTalkPlayList(int page,String accessToken);
-    void loadTalkPodCasts(int page,String accessToken);
+    void loadTalkList(int page, String accessToken);
+
+    void loadTalkPlayList(int page, String accessToken);
+
+    void loadTalkPodCasts(int page, String accessToken);
 }
