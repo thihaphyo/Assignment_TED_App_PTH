@@ -16,6 +16,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -170,7 +171,66 @@ public class HttpUrlConnectionDataAgentImpl implements TedTalkDataAgent {
     }
 
     @Override
-    public void loadTalkPodCasts(int page, String accessToken) {
+    public void loadTalkPodCasts(final int page, final String accessToken) {
+
+        new AsyncTask<Void, Void, String>() {
+            URL url;
+            BufferedReader reader;
+            StringBuilder stringBuilder;
+            @Override
+            protected String doInBackground(Void... voids) {
+                try {
+                    url = new URL(TedTalkConstants.BASE_URL+TedTalkConstants.API_GET_TED_PLAYLIST);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setConnectTimeout(15 * 1000);
+                    httpURLConnection.setReadTimeout(15 * 1000);
+
+                    List<NameValuePair> params = new ArrayList<>();
+                    params.add(new BasicNameValuePair(TedTalkConstants.PARAM_ACCESS_TOKEN,accessToken));
+                    params.add(new BasicNameValuePair(TedTalkConstants.PARAM_PAGE,String.valueOf(page)));
+
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+                    writer.write(getQuery(params));
+                    writer.flush();
+                    writer.close();
+                    outputStream.close();
+
+                    httpURLConnection.connect();
+
+                    reader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                    stringBuilder = new StringBuilder();
+                    String lines = "";
+
+                    while((lines = reader.readLine())!=null){
+                        stringBuilder.append(lines+"\n");
+                    }
+
+                    String responseString = stringBuilder.toString();
+                    return responseString;
+                } catch (Exception e) {
+                    Log.e("ERR_"+TedTalkConstants.API_GET_TED_PODCASTS,e.getMessage());
+                    e.printStackTrace();
+                }finally {
+                    if(reader!=null){
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            Log.e("ERR_"+TedTalkConstants.API_GET_TED_PODCASTS,e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+            }
+        }.execute();
 
     }
 

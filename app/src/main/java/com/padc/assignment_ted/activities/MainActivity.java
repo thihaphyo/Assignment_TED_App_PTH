@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity
 
         TedTalkModel.getObjectReference().loadTalkList();
         TedTalkModel.getObjectReference().loadTalkPlayList();
+        TedTalkModel.getObjectReference().loadTadPodCasts();
 
     }
 

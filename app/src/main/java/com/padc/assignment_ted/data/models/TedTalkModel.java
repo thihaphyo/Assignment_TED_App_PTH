@@ -38,5 +38,9 @@ public class TedTalkModel {
         mTedTalkDataAgent.loadTalkPlayList(1, ACCESS_TOKEN);
     }
 
+    public void loadTadPodCasts(){
+
+        mTedTalkDataAgent.loadTalkPodCasts(1,ACCESS_TOKEN);
+    }
 
 }
