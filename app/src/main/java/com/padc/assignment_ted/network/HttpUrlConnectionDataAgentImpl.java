@@ -16,7 +16,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -177,10 +176,11 @@ public class HttpUrlConnectionDataAgentImpl implements TedTalkDataAgent {
             URL url;
             BufferedReader reader;
             StringBuilder stringBuilder;
+
             @Override
             protected String doInBackground(Void... voids) {
                 try {
-                    url = new URL(TedTalkConstants.BASE_URL+TedTalkConstants.API_GET_TED_PLAYLIST);
+                    url = new URL(TedTalkConstants.BASE_URL + TedTalkConstants.API_GET_TED_PLAYLIST);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
                     httpURLConnection.setRequestMethod("POST");
@@ -188,11 +188,11 @@ public class HttpUrlConnectionDataAgentImpl implements TedTalkDataAgent {
                     httpURLConnection.setReadTimeout(15 * 1000);
 
                     List<NameValuePair> params = new ArrayList<>();
-                    params.add(new BasicNameValuePair(TedTalkConstants.PARAM_ACCESS_TOKEN,accessToken));
-                    params.add(new BasicNameValuePair(TedTalkConstants.PARAM_PAGE,String.valueOf(page)));
+                    params.add(new BasicNameValuePair(TedTalkConstants.PARAM_ACCESS_TOKEN, accessToken));
+                    params.add(new BasicNameValuePair(TedTalkConstants.PARAM_PAGE, String.valueOf(page)));
 
                     OutputStream outputStream = httpURLConnection.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                     writer.write(getQuery(params));
                     writer.flush();
                     writer.close();
@@ -204,21 +204,21 @@ public class HttpUrlConnectionDataAgentImpl implements TedTalkDataAgent {
                     stringBuilder = new StringBuilder();
                     String lines = "";
 
-                    while((lines = reader.readLine())!=null){
-                        stringBuilder.append(lines+"\n");
+                    while ((lines = reader.readLine()) != null) {
+                        stringBuilder.append(lines + "\n");
                     }
 
                     String responseString = stringBuilder.toString();
                     return responseString;
                 } catch (Exception e) {
-                    Log.e("ERR_"+TedTalkConstants.API_GET_TED_PODCASTS,e.getMessage());
+                    Log.e("ERR_" + TedTalkConstants.API_GET_TED_PODCASTS, e.getMessage());
                     e.printStackTrace();
-                }finally {
-                    if(reader!=null){
+                } finally {
+                    if (reader != null) {
                         try {
                             reader.close();
                         } catch (IOException e) {
-                            Log.e("ERR_"+TedTalkConstants.API_GET_TED_PODCASTS,e.getMessage());
+                            Log.e("ERR_" + TedTalkConstants.API_GET_TED_PODCASTS, e.getMessage());
                             e.printStackTrace();
                         }
                     }
