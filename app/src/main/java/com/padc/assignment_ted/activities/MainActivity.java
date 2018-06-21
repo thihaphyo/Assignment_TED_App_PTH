@@ -4,22 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.padc.assignment_ted.R;
 import com.padc.assignment_ted.adapters.TalkListAdapter;
 import com.padc.assignment_ted.data.models.TedTalkModel;
+import com.padc.assignment_ted.data.vos.TedTalksVO;
 import com.padc.assignment_ted.delegates.TalksDelegate;
+import com.padc.assignment_ted.events.SuccessGetTedTalkEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends BaseActivity
-        implements TalksDelegate{
-
+        implements TalksDelegate {
+    private TalkListAdapter mTalkListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +43,15 @@ public class MainActivity extends BaseActivity
             }
         });
 
-       RecyclerView rvTalkList =  findViewById(R.id.rv_talks);
-       TalkListAdapter talkListAdapter = new TalkListAdapter(this);
-       rvTalkList.setAdapter(talkListAdapter);
-       rvTalkList.setLayoutManager(new LinearLayoutManager(getApplicationContext()
-                                 ,LinearLayoutManager.VERTICAL,false));
+
+        RecyclerView rvTalkList = findViewById(R.id.rv_talks);
+        mTalkListAdapter = new TalkListAdapter(this);
+        rvTalkList.setAdapter(mTalkListAdapter);
+        rvTalkList.setLayoutManager(new LinearLayoutManager(getApplicationContext()
+                , LinearLayoutManager.VERTICAL, false));
 
         TedTalkModel.getObjectReference().loadTalkList();
-        TedTalkModel.getObjectReference().loadTalkPlayList();
-        TedTalkModel.getObjectReference().loadTadPodCasts();
+
 
     }
 
@@ -73,8 +78,32 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void onTapTalk() {
-        Intent intent = new Intent(getApplicationContext(),TalksDetailsActivity.class);
+    public void onTapTalk(TedTalksVO tedTalks) {
+        Intent intent = new Intent(getApplicationContext(), TalksDetailsActivity.class);
+        intent.putExtra("talkId",tedTalks.getTalkId());
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSuccessGetTedTalks(SuccessGetTedTalkEvent event) {
+        mTalkListAdapter.setTalkList(event.getmTedTalkList());
     }
 }
