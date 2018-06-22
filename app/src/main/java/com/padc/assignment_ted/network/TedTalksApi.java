@@ -28,4 +28,11 @@ public interface TedTalksApi {
             @Field(TedTalkConstants.PARAM_PAGE) int page
     );
 
+    @FormUrlEncoded
+    @POST(TedTalkConstants.API_GET_TED_PODCASTS)
+    Call<GetTedTalkResponse> loadTalkPodCasts(
+            @Field(TedTalkConstants.PARAM_ACCESS_TOKEN) String accessToken,
+            @Field(TedTalkConstants.PARAM_PAGE) int page
+    );
+
 }

@@ -94,12 +94,85 @@ public class OkHttpDataAgentImpl implements TedTalkDataAgent {
     }
 
     @Override
-    public void loadTalkPlayList(int page, String accessToken) {
+    public void loadTalkPlayList(final int page, final String accessToken) {
 
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+                RequestBody body = new FormBody.Builder()
+                        .add(TedTalkConstants.PARAM_ACCESS_TOKEN, accessToken)
+                        .add(TedTalkConstants.PARAM_PAGE, String.valueOf(page))
+                        .build();
+                Request request = new Request.Builder()
+                        .url(TedTalkConstants.BASE_URL + TedTalkConstants.API_GET_TED_PLAYLIST)
+                        .post(body)
+                        .build();
+
+                try {
+                    Response response = mOkHttpClient.newCall(request).execute();
+                    String responseString = response.body().string();
+                    return responseString;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String responseString) {
+                super.onPostExecute(responseString);
+                Gson gson = new Gson();
+                GetTedTalkResponse tedTalkResponse = gson.fromJson(responseString, GetTedTalkResponse.class);
+                if (tedTalkResponse.isResponseOk()) {
+                    SuccessGetTedTalkEvent successGetTedTalkEvent = new SuccessGetTedTalkEvent(tedTalkResponse.getTedTalks());
+                    EventBus.getDefault().post(successGetTedTalkEvent);
+                } else {
+                    ApiErrorEvent errorEvent = new ApiErrorEvent(tedTalkResponse.getMessage());
+                    EventBus.getDefault().post(errorEvent);
+                }
+            }
+        }.execute();
     }
 
     @Override
-    public void loadTalkPodCasts(int page, String accessToken) {
+    public void loadTalkPodCasts(final int page, final String accessToken) {
+
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+                RequestBody body = new FormBody.Builder()
+                        .add(TedTalkConstants.PARAM_ACCESS_TOKEN, accessToken)
+                        .add(TedTalkConstants.PARAM_PAGE, String.valueOf(page))
+                        .build();
+                Request request = new Request.Builder()
+                        .url(TedTalkConstants.BASE_URL + TedTalkConstants.API_GET_TED_PODCASTS)
+                        .post(body)
+                        .build();
+                try {
+                    Response response = mOkHttpClient.newCall(request).execute();
+                    String responseString = response.body().string();
+                    return responseString;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String responseString) {
+                super.onPostExecute(responseString);
+                Gson gson = new Gson();
+                GetTedTalkResponse tedTalkResponse = gson.fromJson(responseString, GetTedTalkResponse.class);
+                if (tedTalkResponse.isResponseOk()) {
+                    SuccessGetTedTalkEvent event = new SuccessGetTedTalkEvent(tedTalkResponse.getTedTalks());
+                    EventBus.getDefault().post(event);
+                } else {
+                    ApiErrorEvent errorEvent = new ApiErrorEvent(tedTalkResponse.getMessage());
+                    EventBus.getDefault().post(errorEvent);
+                }
+            }
+        }.execute();
 
     }
 }

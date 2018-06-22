@@ -85,10 +85,71 @@ public class RetrofitDataAgentImpl implements TedTalkDataAgent {
     @Override
     public void loadTalkPlayList(int page, String accessToken) {
 
+        Call<GetTedTalkResponse> apiCall = mTheApi.loadTalkList(accessToken, page);
+        apiCall.enqueue(new Callback<GetTedTalkResponse>() {
+            @Override
+            public void onResponse(Call<GetTedTalkResponse> call, Response<GetTedTalkResponse> response) {
+                GetTedTalkResponse tedTalkResponse = response.body();
+                if (tedTalkResponse != null && tedTalkResponse.isResponseOk()) {
+
+                    SuccessGetTedTalkEvent event = new SuccessGetTedTalkEvent(tedTalkResponse.getTedTalks());
+                    EventBus.getDefault().post(event);
+
+                } else {
+                    if (tedTalkResponse == null) {
+
+                        ApiErrorEvent errorEvent = new ApiErrorEvent("Empty in response.");
+                        EventBus.getDefault().post(errorEvent);
+
+                    } else {
+                        ApiErrorEvent errorEvent = new ApiErrorEvent(tedTalkResponse.getMessage());
+                        EventBus.getDefault().post(errorEvent);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetTedTalkResponse> call, Throwable t) {
+                ApiErrorEvent errorEvent = new ApiErrorEvent(t.getMessage());
+                EventBus.getDefault().post(errorEvent);
+            }
+        });
+
     }
 
     @Override
     public void loadTalkPodCasts(int page, String accessToken) {
+
+        Call<GetTedTalkResponse> apiCall = mTheApi.loadTalkPodCasts(accessToken, page);
+        apiCall.enqueue(new Callback<GetTedTalkResponse>() {
+            @Override
+            public void onResponse(Call<GetTedTalkResponse> call, Response<GetTedTalkResponse> response) {
+
+                GetTedTalkResponse tedTalkResponse = response.body();
+                if (tedTalkResponse != null && tedTalkResponse.isResponseOk()) {
+
+                    SuccessGetTedTalkEvent successGetTedTalkEvent = new SuccessGetTedTalkEvent(tedTalkResponse.getTedTalks());
+                    EventBus.getDefault().post(successGetTedTalkEvent);
+
+                } else {
+                    if (tedTalkResponse == null) {
+                        ApiErrorEvent errorEvent = new ApiErrorEvent("Empty in response.");
+                        EventBus.getDefault().post(errorEvent);
+                    } else {
+                        ApiErrorEvent errorEvent = new ApiErrorEvent(tedTalkResponse.getMessage());
+                        EventBus.getDefault().post(errorEvent);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetTedTalkResponse> call, Throwable t) {
+
+                ApiErrorEvent event = new ApiErrorEvent(t.getMessage());
+                EventBus.getDefault().post(event);
+
+            }
+        });
 
     }
 }
