@@ -11,7 +11,7 @@ import java.util.List;
 public class TedTalksVO {
 
     @SerializedName("talk_id")
-    private String talkId;
+    private int talkId;
     @SerializedName("title")
     private String title;
     @SerializedName("speaker")
@@ -25,7 +25,7 @@ public class TedTalksVO {
     @SerializedName("tag")
     private List<TagVO> tags;
 
-    public String getTalkId() {
+    public int getTalkId() {
         return talkId;
     }
 

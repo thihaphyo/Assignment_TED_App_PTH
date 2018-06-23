@@ -17,6 +17,7 @@ import com.padc.assignment_ted.data.models.TedTalkModel;
 import com.padc.assignment_ted.data.vos.TedTalksVO;
 import com.padc.assignment_ted.delegates.TalksDelegate;
 import com.padc.assignment_ted.events.SuccessGetTedTalkEvent;
+import com.padc.assignment_ted.utils.TedTalkConstants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -80,7 +81,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void onTapTalk(TedTalksVO tedTalks) {
         Intent intent = new Intent(getApplicationContext(), TalksDetailsActivity.class);
-        intent.putExtra("talkId",tedTalks.getTalkId());
+        intent.putExtra(TedTalkConstants.TALK_ID,tedTalks.getTalkId());
         startActivity(intent);
     }
 

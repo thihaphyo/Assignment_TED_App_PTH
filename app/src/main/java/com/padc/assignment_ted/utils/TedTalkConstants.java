@@ -14,4 +14,7 @@ public class TedTalkConstants {
     //Parameters
     public static final String PARAM_ACCESS_TOKEN = "access_token";
     public static final String PARAM_PAGE = "page";
+
+    //Intents
+    public static final String TALK_ID = "talkID";
 }

@@ -24,7 +24,7 @@ public class TedTalkModel {
 
     private static final String ACCESS_TOKEN = "b002c7e1a528b7cb460933fc2875e916";
 
-    private Map<String, TedTalksVO> mTedTalks;
+    private Map<Integer, TedTalksVO> mTedTalks;
 
     private TedTalkModel() {
 
@@ -68,7 +68,7 @@ public class TedTalkModel {
         }
     }
 
-    public TedTalksVO getTedTalkById(String talkId) {
+    public TedTalksVO getTedTalkById(int talkId) {
 
         return mTedTalks.get(talkId);
 
